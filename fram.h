@@ -15,16 +15,22 @@ typedef enum
 	FRAM_WREN = 0x06
 } FRAMCommand_t;
 
+typedef enum
+{
+	FRAM_WRITE_AND_CHECK,
+	FRAM_WRITE_BLIND
+} FRAMWriteType_t;
+
 void FRAM_EnableWrite(void);
 void FRAM_DisableWrite(void);
 
 unsigned char FRAM_ReadStatus(void);
 void FRAM_WriteStatus(unsigned char stat);
 
-void FRAM_WriteChar(unsigned short addr, unsigned char byte);
+void FRAM_WriteChar(unsigned short addr, unsigned char byte, FRAMWriteType_t check);
 unsigned char FRAM_ReadChar(unsigned short addr);
 
-void FRAM_WriteData(unsigned short addr, unsigned char *data, unsigned short nBytes);
+void FRAM_WriteData(unsigned short addr, unsigned char *data, unsigned short nBytes, FRAMWriteType_t check);
 void FRAM_ReadData(unsigned short addr, unsigned char *data, unsigned short nBytes);
 
 #endif
